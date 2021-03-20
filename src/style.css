@@ -1,0 +1,40 @@
+body {
+  background-image: url(sunset.jpeg);
+  position: relative;
+}
+
+.container {
+  box-sizing: border-box;
+  border-radius: 20px;
+  margin-top: 50px;
+  padding: 50px;
+  border: solid 1px black;
+}
+
+.tomorrow,
+.second,
+.third,
+.fourth,
+.fifth {
+  border: solid 1px black;
+  border-radius: 10px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.tomorrow:hover,
+.second:hover,
+.third:hover,
+.fourth:hover,
+.fifth:hover {
+  background-color: #5c636a;
+  transition: all 200ms ease-in-out;
+}
+
+.temp-today {
+  font-size: 30px;
+}
+
+button {
+  margin: 60px;
+}
