@@ -23,7 +23,11 @@ function searchCity(event){
   function displayTemp(response){
     let temperature = Math.round(response.data.main.temp);
     let description = document.querySelector(".temp-today");
-    description.innerHTML = `${temperature}°C`; 
+    let wind = document.querySelector(".wind");
+    let humidity = document.querySelector(".humidity");
+    description.innerHTML = `${temperature}°C`;
+    wind.innerHTML = Math.round(response.data.wind.speed); 
+    humidity.innerHTML = Math.round(response.data.main.humidity);
 }
 
 let apiKey = `697c2d8339ebb153248e96d435fb4f8d`;
