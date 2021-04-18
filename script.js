@@ -6,9 +6,12 @@ let weekdays = [`Sunday`, `Monday`,`Tuesday`,`Wednesday`,`Thursday`,`Friday`,`Sa
 let day = weekdays[today.getDay()];
 let hour = today.getHours();
 let minute = today.getMinutes();
+if (minute < 10){
+  minute = `0${minute}`;
+}
 
 let todaysDate = document.querySelector("h3");
-todaysDate.innerHTML = `${day}, ${hour}:${minute}`;
+todaysDate.innerHTML = `Last updated: ${day}, ${hour}:${minute}`;
 }
 
 formatDate(new Date());
@@ -25,10 +28,13 @@ function searchCity(event){
     let description = document.querySelector(".temp-today");
     let wind = document.querySelector(".wind");
     let humidity = document.querySelector(".humidity");
+    let icon = document.querySelector("#icon");
+
     description.innerHTML = `${temperature}°C`;
     wind.innerHTML = Math.round(response.data.wind.speed); 
     humidity.innerHTML = Math.round(response.data.main.humidity);
-}
+    icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  }
 
 let apiKey = `697c2d8339ebb153248e96d435fb4f8d`;
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}&units=metric`;
