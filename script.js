@@ -23,6 +23,7 @@ function searchCity(event){
   let city = document.querySelector("#city");
   city.innerHTML = `${input.value}`;
 
+
   function displayTemp(response){
     let temperature = Math.round(response.data.main.temp);
     let description = document.querySelector(".temp-today");
@@ -30,7 +31,7 @@ function searchCity(event){
     let humidity = document.querySelector(".humidity");
     let icon = document.querySelector("#icon");
 
-    description.innerHTML = `${temperature}°C`;
+    description.innerHTML = `${temperature}`;
     wind.innerHTML = Math.round(response.data.wind.speed); 
     humidity.innerHTML = Math.round(response.data.main.humidity);
     icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
@@ -41,6 +42,7 @@ let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&a
 
 axios.get(apiUrl).then(displayTemp);  
 }
+
   let buttonPress = document.querySelector("#button-addon2");
   buttonPress.addEventListener("click", searchCity);
 
