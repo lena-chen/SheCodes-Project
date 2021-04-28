@@ -2,6 +2,10 @@ body {
   background-image: linear-gradient(to top, #ad899d 0%, #ad899d 100%);
 }
 
+.update {
+  font-size: 16px;
+}
+
 .weather-app {
   max-width: 600px;
   box-sizing: border-box;
@@ -33,8 +37,10 @@ body {
   transition: all 200ms ease-in-out;
 }
 
-.temp-today {
-  font-size: 30px;
+.temp-today,
+h1 {
+  font-size: 35px;
+  margin-top: 50px;
 }
 
 button {
