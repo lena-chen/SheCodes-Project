@@ -14,6 +14,33 @@ let todaysDate = document.querySelector("h3");
 todaysDate.innerHTML = `Last updated: ${day}, ${hour}:${minute}`;
 }
 
+function displayForecast () {
+  let forecastElement = document.querySelector("#forecast");
+
+  let days = ["Thu", "Fri", "Sat", "Sun"];
+
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function(day){
+    forecastHTML = forecastHTML + `
+      <div class="col-2">
+        <div class="forecast-day">${day}
+          <br>
+         <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" width="42">
+         <div class="forecast-temp">
+           <span class="forecast-max-temp"><strong>14°</strong></span>
+           <span class="forecast-min-temp">5°</span>
+         </div>
+        </div>
+      </div>
+`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+displayForecast();
+
 formatDate(new Date());
 
 function searchCity(event){
@@ -66,3 +93,5 @@ function showCity(position){
 }
 
 navigator.geolocation.getCurrentPosition(showCity)
+
+

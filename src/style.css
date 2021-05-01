@@ -17,22 +17,14 @@ body {
   position: relative;
 }
 
-.tomorrow,
-.second,
-.third,
-.fourth,
-.fifth {
+.forecast-day {
   border: solid 1px black;
   border-radius: 10px;
   text-align: center;
   box-sizing: border-box;
 }
 
-.tomorrow:hover,
-.second:hover,
-.third:hover,
-.fourth:hover,
-.fifth:hover {
+.forecast-day:hover {
   background-color: #ad899d;
   transition: all 200ms ease-in-out;
 }
