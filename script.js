@@ -14,7 +14,7 @@ let todaysDate = document.querySelector("h3");
 todaysDate.innerHTML = `Last updated: ${day}, ${hour}:${minute}`;
 }
 
-function displayForecast () {
+function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
 
   let days = ["Thu", "Fri", "Sat", "Sun"];
@@ -39,7 +39,12 @@ function displayForecast () {
   forecastElement.innerHTML = forecastHTML;
 }
 
-displayForecast();
+function getForecast (coordinates){
+  let apiKey = `697c2d8339ebb153248e96d435fb4f8d`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 
 formatDate(new Date());
 
@@ -53,7 +58,7 @@ function searchCity(event){
 
   function displayTemp(response){
     let temperature = Math.round(response.data.main.temp);
-    let description = document.querySelector(".temp-today");
+    let description = document.querySelector("#temperature");
     let wind = document.querySelector(".wind");
     let humidity = document.querySelector(".humidity");
     let icon = document.querySelector("#icon");
@@ -62,6 +67,9 @@ function searchCity(event){
     wind.innerHTML = Math.round(response.data.wind.speed); 
     humidity.innerHTML = Math.round(response.data.main.humidity);
     icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+
+    celsiusTemperature = response.data.main.temp;
+    getForecast(response.data.coord);
   }
 
 let apiKey = `697c2d8339ebb153248e96d435fb4f8d`;
@@ -94,4 +102,33 @@ function showCity(position){
 
 navigator.geolocation.getCurrentPosition(showCity)
 
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
 
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+searchCity("Zurich");
