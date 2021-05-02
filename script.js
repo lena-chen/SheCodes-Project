@@ -62,7 +62,17 @@ function searchCity(event){
   let city = document.querySelector("#city");
   city.innerHTML = `${input.value}`;
 
-  function displayTemp(response){
+  search(input.value);
+}
+
+function search(city){
+let apiKey = `697c2d8339ebb153248e96d435fb4f8d`;
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+axios.get(apiUrl).then(displayTemp); 
+}
+
+function displayTemp(response){
     let temperature = Math.round(response.data.main.temp);
     let description = document.querySelector("#temperature");
     let wind = document.querySelector(".wind");
@@ -75,13 +85,8 @@ function searchCity(event){
     icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     
     getForecast(response.data.coord);
-  }
-
-let apiKey = `697c2d8339ebb153248e96d435fb4f8d`;
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}&units=metric`;
-
-axios.get(apiUrl).then(displayTemp);  
 }
+search("Zurich");
 
   let buttonPress = document.querySelector("#button-addon2");
   buttonPress.addEventListener("click", searchCity);
