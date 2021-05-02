@@ -53,7 +53,6 @@ function getForecast (coordinates){
   axios.get(apiUrl).then(displayForecast);
 }
 
-
 formatDate(new Date());
 
 function searchCity(event){
@@ -62,7 +61,6 @@ function searchCity(event){
   let input = document.querySelector(".form-control");
   let city = document.querySelector("#city");
   city.innerHTML = `${input.value}`;
-
 
   function displayTemp(response){
     let temperature = Math.round(response.data.main.temp);
@@ -75,8 +73,7 @@ function searchCity(event){
     wind.innerHTML = Math.round(response.data.wind.speed); 
     humidity.innerHTML = Math.round(response.data.main.humidity);
     icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
-
-//    celsiusTemperature = response.data.main.temp;
+    
     getForecast(response.data.coord);
   }
 
@@ -89,17 +86,7 @@ axios.get(apiUrl).then(displayTemp);
   let buttonPress = document.querySelector("#button-addon2");
   buttonPress.addEventListener("click", searchCity);
 
-
-  
-function currentPosition(event){
-event.preventDefault();
-
-}
-let currentLocation = document.querySelector("#btn btn-outline-secondary");
-currentLocation.addEventListener("click", currentPosition);
-
 function showCity(position){
-  console.log(position);
   let apiKey = `697c2d8339ebb153248e96d435fb4f8d`;
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
@@ -107,5 +94,3 @@ function showCity(position){
 
   axios.get(apiUrl).then(currentPosition)
 }
-
-navigator.geolocation.getCurrentPosition(showCity)
